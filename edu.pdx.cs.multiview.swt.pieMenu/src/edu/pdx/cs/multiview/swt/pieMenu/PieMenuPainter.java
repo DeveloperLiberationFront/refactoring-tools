@@ -24,25 +24,9 @@ public class PieMenuPainter implements PaintListener {
 
 	private final PieMenu pieMenu;
 
-	final Color LIGHT_BLUE = new Color(Display.getCurrent(), 182, 204, 232); // b6cce8
-	final Color MEDIUM_BLUE = new Color(Display.getCurrent(), 134, 171, 217); // 86abd9
-	final Color DARK_BLUE = new Color(Display.getCurrent(), 107, 148, 200); // 6b94c8
-	final Color DARK_GRAY = new Color(Display.getCurrent(), 60, 60, 60);
-	final Color MEDIUM_GRAY = new Color(Display.getCurrent(), 200, 200, 200);
-	final Color RED = new Color(Display.getCurrent(), 150, 0, 0);
-
-	final Color FONT_COLOR = DARK_GRAY;
-	final Color SELECTED_FONT_COLOR = DARK_GRAY;//Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
-
-	final Color BG_COLOR = LIGHT_BLUE;
-	final Color MOUSEOVER_COLOR = MEDIUM_BLUE;
-
-	final Color INACTIVE_COLOR = MEDIUM_GRAY;
-	final Color INACTIVE_MOUSEOVER_COLOR = DARK_BLUE;
-
 	static final double DEFAULT_START = Math.PI / 2;
-
-	// FIXME these should really be disposed
+	
+	//FIXME these should really be disposed
 	private static Color selectedColor;
 	private static Font font;
 
@@ -62,10 +46,10 @@ public class PieMenuPainter implements PaintListener {
 	}
 
 	/**
-	 * @return the radius of the circle
+	 * @return	the radius of the circle
 	 */
-	public int getRadius() {
-		return pieMenu.getRadius();
+	public static int getRadius() {
+		return 110;
 	}
 
 	/*
@@ -75,156 +59,109 @@ public class PieMenuPainter implements PaintListener {
 		return 0.76;
 	}
 
-	/*
-	 * Mouse over Color (Blue)
-	 */
 	private Color getSelectedColor() {
-
-		if (selectedColor == null) {
-			selectedColor = MOUSEOVER_COLOR;
+		
+		if(selectedColor==null){
+			selectedColor = new Color(Display.getCurrent(),153,217,234);
 		}
-
+		
 		return selectedColor;
 	}
-
-	/*
-	 * Font size and type
-	 */
+	
 	private static Font getFont() {
-		if (font == null)
-			font = new Font(Display.getCurrent(), "Calibri", 12, SWT.NONE);
+		if(font==null)
+			font = new Font(Display.getCurrent(), "Calibri", 13, SWT.NONE);
 		return font;
 	}
 
 	private Color getLineColor() {
-		return Display.getCurrent()
-				.getSystemColor(SWT.COLOR_WIDGET_DARK_SHADOW);
+		return Display.getCurrent().getSystemColor(SWT.COLOR_WIDGET_DARK_SHADOW);
 	}
 
 	private Color getSelectedFontColor() {
-		return SELECTED_FONT_COLOR;
-	}
-
-	private Color getInactiveFillColor() {
-		return INACTIVE_COLOR;
-	}
-
-	private Color getInactiveMouseOverColor() {
-		return INACTIVE_MOUSEOVER_COLOR;
+		return Display.getCurrent().getSystemColor(
+				SWT.COLOR_BLACK);
 	}
 
 	private Color getFontColor() {
-		return FONT_COLOR;
+		return Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
 	}
 
-	/*
-	 * white background
-	 */
 	private Color getFillColor() {
-		// return
-		// Display.getCurrent().getSystemColor(SWT.COLOR_LIST_BACKGROUND);
-		return BG_COLOR;
-
+		return Display.getCurrent().getSystemColor(SWT.COLOR_LIST_BACKGROUND);
 	}
 
 	private void renderString(GC gc, Coordinate circleCenter, String str,
 			Coordinate textPosition, boolean selected) {
 
 		gc.setFont(getFont());
-
+		
 		// // 1. Compute the width of the string.
 		FontMetrics fmetric = gc.getFontMetrics(); // current font
 		// metrics
-		float charHeight = fmetric.getHeight(); // height is constant
+		float charHeight = fmetric.getHeight(); // height is constant		
 
 		Coordinate pt = textPosition.movedInOrOutBy(scalingFactor())
 				.toJavaCoordinate(circleCenter);
 
 		// // 3. Tokenize the String, in case it has newlines and such.
-
-		StringTokenizer strtok;
-		if (pieMenu.getMenuType() == PieMenu.SEPARATE_MENU_TYPE
-				&& pieMenu.getMenuItemShape() == PieMenu.MENU_ITEM_RECT)
-			strtok = new StringTokenizer(str.replaceAll("\n", " "), "_");
-		else
-			strtok = new StringTokenizer(str, "\r\n\t");
+		StringTokenizer strtok = new StringTokenizer(str, "\r\n\t");
 		int offset = 0;
-		String token = PieMenu.NULL_STRING;
+		String token;
 
-		// TODO Change it for doughnut menu
 		// // 3.1. Draw each token so that it is centered at pt.x and pt.y.
 		int y = pt.y()
 				- (int) (((((float) (strtok.countTokens() - 1f)) / 2f) * charHeight));
 		int x = pt.x();
-
+		gc.setForeground(selected ? getSelectedFontColor() : getFontColor());		
+		
 		while (strtok.hasMoreTokens()) {
 			token = strtok.nextToken();
-
+			
 			int tokenWidth = 0;
-			for (char c : token.toCharArray()) {
+			for(char c : token.toCharArray()){
 				tokenWidth += gc.getAdvanceWidth(c);
 			}
-
+			
 			gc.drawString(token, (int) (x - 0.5 * tokenWidth),
 					(int) (y - 0.5 * charHeight) + offset);
 			offset += charHeight;
 		}
-
-		// sets the font color
-		gc.setForeground(selected ? getSelectedFontColor() : getFontColor());
-
 	}
-
-	private boolean isInactive(String token) {
 	
-		return token.equalsIgnoreCase(PieMenu.NULL_STRING);
-	}
-
 	private void renderSubmenuIcon(GC gc, Coordinate circleCenter, double angle) {
-		gc.drawPolygon(pointer(getRadius(), angle, circleCenter));
+		gc.drawPolygon(pointer(getRadius(),angle,circleCenter));
 	}
-
-	public int[] pointer(double distance, double angle, Coordinate center) {
-
-		Coordinate outerTip = Coordinate.create(distance, angle)
-				.toJavaCoordinate(center);
-		Coordinate left = Coordinate.create(distance - 10, angle - 0.1)
-				.toJavaCoordinate(center);
-		Coordinate right = Coordinate.create(distance - 10, angle + 0.1)
-				.toJavaCoordinate(center);
-
-		int[] points = new int[6];
+	
+	public int[] pointer(double distance, double angle, Coordinate center){
+		
+		Coordinate outerTip = Coordinate.create(distance, angle).toJavaCoordinate(center);
+		Coordinate left = Coordinate.create(distance-10, angle-0.1).toJavaCoordinate(center);
+		Coordinate right = Coordinate.create(distance-10, angle+0.1).toJavaCoordinate(center);
+		
+		int[] points = new int [6];
 		points[0] = left.x();
 		points[1] = left.y();
 		points[2] = outerTip.x();
 		points[3] = outerTip.y();
 		points[4] = right.x();
 		points[5] = right.y();
-
+		
 		return points;
 	}
 
-	/*
-	 * fill small circle
-	 */
 	private void fillSmallCircle(GC gc) {
 		gc.fillOval(smallCircleCoord(), smallCircleCoord(), smallRadius(),
 				smallRadius());
 	}
 
-	/*
-	 * draw borders
-	 */
 	private void drawSmallCircle(GC gc) {
 		gc.drawOval(smallCircleCoord(), smallCircleCoord(), smallRadius(),
 				smallRadius());
 	}
-
-	/*
-	 * draws big circle's borders
-	 */
-	private void drawLargeCircle(GC gc) {
-		int diameter = getRadius() * 2 - 1;
+	
+	private void drawLargeCircle(GC gc){
+		int diameter = getRadius()*2-1;
 		gc.drawOval(1, 1, diameter, diameter);
 	}
 
@@ -247,14 +184,8 @@ public class PieMenuPainter implements PaintListener {
 		return false;
 	}
 
-	/*
-	 * Sent when mouse moves over menu.
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events
-	 * .PaintEvent)
-	 */
 	public void paintControl(PaintEvent e) {
+
 		GC gc = e.gc;
 
 		int numItems = pieMenu.getItemCount();
@@ -269,46 +200,40 @@ public class PieMenuPainter implements PaintListener {
 					getRadius());
 
 			for (IndexedArc arc : getArcs()) {
-
+				
 				boolean isSelected = pieMenu.getSelectedItem() == arc.index;
+				gc.setBackground(isSelected ? getSelectedColor()
+						: getFillColor());
+				arc.arc.fill(gc);
 
 				IPieMenu item = pieMenu.getItem(arc.index);
 
-				gc.setBackground(isInactive(item.getText()) ? getInactiveFillColor()
-						: isSelected ? getSelectedColor() : getFillColor());
-				// fills background
-				arc.arc.fill(gc);
+				Coordinate textPosition = arc.arc.center().movedInOrOutBy(scalingFactor());
 
-				Coordinate textPosition = arc.arc.center().movedInOrOutBy(
-						scalingFactor());
-
-				renderString(gc, circleCenter, item.getText(), textPosition,
-						isSelected);
-
-				if (!item.isEmpty())
-					renderSubmenuIcon(gc, circleCenter, textPosition.theta());
+				renderString(gc, circleCenter, item.getText(), textPosition, isSelected);
+				
+				if(!item.isEmpty())
+					renderSubmenuIcon(gc,circleCenter,textPosition.theta());
 			}
 		}
 
-		// border line width
 		gc.setLineWidth(1);
-
-		gc.setForeground(getLineColor());
+		
+		gc.setForeground(getLineColor());						
 		drawLargeCircle(gc);
-
-		// draws separation lines
+		
 		if (numItems > 1)
 			for (IndexedArc arc : getArcs())
 				arc.arc.drawLine(gc);
-
-		gc.setBackground(pieMenu.getSelectedItem() < 0 ? getSelectedColor()
-				: getFillColor());
-
-		// fill small circle with color
+		
+		gc.setBackground(pieMenu.getSelectedItem() < 0 ? 
+				getSelectedColor() : getFillColor());
+		
 		fillSmallCircle(gc);
-		// draw borders for small circle
 		drawSmallCircle(gc);
 	}
+
+
 
 	private ArcSet arcset;
 
@@ -356,14 +281,11 @@ public class PieMenuPainter implements PaintListener {
 		}
 	}
 
-	/*
-	 * Called to determine which arc mouse is over.
-	 */
 	public int getItemIndex(Coordinate c) {
 
-		if (c.radius() < this.smallRadius())
+		if(c.radius()<this.smallRadius())
 			return -1;
-
+		
 		for (IndexedArc arc : getArcs()) {
 			if (arc.arc.contains(c)) {
 				return arc.index;
@@ -375,39 +297,41 @@ public class PieMenuPainter implements PaintListener {
 }
 
 /*
- * 
- * This class was originally derived from another piece of software:
- * 
- * Copyright (c) 2000 Regents of the University of California. All rights
- * reserved.
- * 
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
- * 1. Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- * 
- * 3. All advertising materials mentioning features or use of this software must
- * display the following acknowledgement:
- * 
- * This product includes software developed by the Group for User Interface
- * Research at the University of California at Berkeley.
- * 
- * 4. The name of the University may not be used to endorse or promote products
- * derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+ 
+This class was originally derived from another piece of software:
+ 
+Copyright (c) 2000 Regents of the University of California.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+3. All advertising materials mentioning features or use of this software
+   must display the following acknowledgement:
+
+      This product includes software developed by the Group for User 
+      Interface Research at the University of California at Berkeley.
+
+4. The name of the University may not be used to endorse or promote products 
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+*/
