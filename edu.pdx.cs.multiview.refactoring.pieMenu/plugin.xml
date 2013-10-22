@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="edu.pdx.cs.multiview.refactoring.piemenu.Startup">
+      </startup>
+   </extension>
+
+	<extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Pie Menu Usability Action Set"
+            visible="true"
+            id="pie.menu.usability.action.set">
+         <action
+               class="edu.pdx.cs.multiview.refactoring.piemenu.usability.UsabilityTestActivator"
+               id="pie.menu.toggle.action"
+               label="Pie Menu"
+               menubarPath="sampleMenu/sampleGroup"
+               style="pulldown"
+               toolbarPath="sampleGroup"
+               tooltip="Toggle Pie Menus">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

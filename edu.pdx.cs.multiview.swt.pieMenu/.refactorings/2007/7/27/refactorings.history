@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Convert local variable 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuDemo.main().shell' in 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuDemo.main()' to field&#13;&#10;- Original project: 'edu.pdx.cs.multiview.swt.pieMenu'&#13;&#10;- Original element: 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuDemo.main().shell'&#13;&#10;- Field name: 'shell'&#13;&#10;- Initialize field in method&#13;&#10;- Declared visibility: 'private'&#13;&#10;- Declare field 'static'" description="Convert local variable 'shell' to field" final="false" flags="2" id="org.eclipse.jdt.ui.promote.temp" initialize="1" input="/src&lt;edu.pdx.cs.multiview.swt.pieMenu{PieMenuDemo.java" name="shell" selection="271 5" stamp="1183779119087" static="true" version="1.0" visibility="2"/>
+</session>

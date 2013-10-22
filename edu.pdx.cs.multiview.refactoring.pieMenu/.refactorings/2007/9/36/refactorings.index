@@ -1,0 +1,8 @@
+1188960085339	Inline method 'fillTypeMenu'
+1188971148217	Extract method 'createAnonymousType'
+1188971287557	Extract method 'createChange'
+1188971290521	Inline local variable 'change'
+1188971361003	Extract method 'hangAnonymousClasslFromConstructor'
+1189054475936	Extract method 'fillConvertToAnonymousMenu'
+1189054556612	Extract method 'fillNestedClassMenu'
+1189054567508	Inline local variable 'typeNode'

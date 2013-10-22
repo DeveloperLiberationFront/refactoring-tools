@@ -1,0 +1,9 @@
+1187123933987	Rename type 'SelectionCueView'
+1187128483378	Rename type 'LinkModeManager'
+1187128493424	Use super type 'LinkModeManager'
+1187128517065	Delete element
+1187128622690	Use super type 'RefactoringBundle'
+1187128631581	Introduce factory for 'RefactoringBundle'
+1187128678643	Rename type 'RefactoringBundle'
+1187128704846	Inline method 'createRefactoringBundle'
+1187128761893	Delete element

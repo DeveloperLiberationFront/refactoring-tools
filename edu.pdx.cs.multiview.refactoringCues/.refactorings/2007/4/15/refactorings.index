@@ -1,0 +1,4 @@
+1176239642140	Rename package 'edu.pdx.cs.mutliview.refactoringview.refactorings'
+1176321807921	Change method 'doRefactoring'
+1176247209562	Inline local variable 'service'
+1176240839703	Rename type 'ExtractTempRefactoring'

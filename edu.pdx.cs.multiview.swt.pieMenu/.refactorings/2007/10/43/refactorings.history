@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Inline method 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator.isMenuActivationEvent()' in 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator'&#13;&#10;- Original project: 'edu.pdx.cs.multiview.swt.pieMenu'&#13;&#10;- Original element: 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator.isMenuActivationEvent()'&#13;&#10;- Remove method declaration" delete="true" description="Inline method 'isMenuActivationEvent'" flags="786434" id="org.eclipse.jdt.ui.inline.method" input="/src&lt;edu.pdx.cs.multiview.swt.pieMenu{PieMenuActivator.java" mode="0" selection="774 21" stamp="1193057344081" version="1.0"/>
+</session>

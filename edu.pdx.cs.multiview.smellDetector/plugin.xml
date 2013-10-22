@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="edu.pdx.cs.multiview.smellDetector.commands.category"
+            name="Smell Category">
+      </category>
+      <command
+            categoryId="edu.pdx.cs.multiview.smellDetector.commands.category"
+            id="edu.pdx.cs.multiview.smellDetector.commands.sampleCommand"
+            name="Smell Command">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="edu.pdx.cs.multiview.smelldetector.ToggleSmellHandler"
+            commandId="edu.pdx.cs.multiview.smellDetector.commands.sampleCommand">
+      </handler>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="edu.pdx.cs.multiview.smellDetector.toolbars.sampleToolbar">
+            <command
+                  commandId="edu.pdx.cs.multiview.smellDetector.commands.sampleCommand"
+                  icon="icons/icon2.GIF"
+                  id="edu.pdx.cs.multiview.smellDetector.toolbars.sampleCommand"
+                  style="toggle"
+                  tooltip="Toggle smell indicator">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+
+</plugin>

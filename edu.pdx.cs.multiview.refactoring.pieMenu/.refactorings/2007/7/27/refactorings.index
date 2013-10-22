@@ -1,0 +1,15 @@
+1183497392683	Extract local variable 'parent'
+1183497615027	Inline local variable 'r'
+1183497618277	Inline local variable 'r'
+1183498063605	Extract local variable 'inlineTempRefactoring'
+1183763727511	Encapsulate field 'builder'
+1183765513183	Inline local variable 'item'
+1183765518980	Inline local variable 'item2'
+1183765523761	Inline local variable 'item3'
+1183766097199	Convert anonymous class to nested
+1183766119402	Convert anonymous class to nested
+1183766247636	Convert anonymous class to nested
+1183766262355	Convert anonymous class to nested
+1183766289214	Convert anonymous class to nested
+1183766315246	Convert anonymous class to nested
+1183766842214	Rename type 'IllogicalBuilder'

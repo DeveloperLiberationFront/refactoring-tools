@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src_test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
+		<accessrules>
+			<accessrule kind="accessible" pattern="org.eclipse.*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/collections-generic-4.01.jar" sourcepath="C:/Documents and Settings/Emerson/My Documents/eclipse_workspaces/collections-generic-4.01-src.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

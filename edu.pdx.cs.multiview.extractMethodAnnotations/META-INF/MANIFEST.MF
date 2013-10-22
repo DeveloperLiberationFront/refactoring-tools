@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ExtractMethodAnnotations Plug-in
+Bundle-SymbolicName: edu.pdx.cs.multiview.extractMethodAnnotations;singleton:=true
+Bundle-Version: 0.4.3
+Bundle-Activator: edu.pdx.cs.multiview.extractmethodannotations.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.core,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor,
+ edu.pdx.cs.multiview.util,
+ org.eclipse.jdt.ui,
+ org.eclipse.ltk.core.refactoring,
+ org.eclipse.ltk.ui.refactoring,
+ org.eclipse.ui.forms,
+ org.junit
+Eclipse-LazyStart: true
+Bundle-ClassPath: lib/collections-generic-4.01.jar,
+ .

@@ -1,0 +1,28 @@
+1182397064346	Convert member type 'ASTAction' to top level
+1182397079508	Convert member type 'RefactoringBundle' to top level
+1182398481945	Convert anonymous class to nested
+1182398504697	Extract local variable 'action'
+1182442570218	Extract method 'markParentWanted'
+1182444370015	Extract interface 'Regions'
+1182445662656	Change method 'getSelectedItems'
+1182445878593	Extract local variable 'statementVisitor'
+1182446191671	Delete element
+1182448753375	Inline local variable 'iter'
+1182450650046	Extract local variable 'iteratorChain'
+1182458097812	Rename method 'isActive'
+1182458218218	Extract method 'xxx'
+1182458223078	Inline method 'isLeaf'
+1182459477390	Inline local variable 'myStart'
+1182459479859	Inline local variable 'myEnd'
+1182462317250	Rename method 'setSelected'
+1182462330703	Change method 'toggleActivation'
+1182554078859	Convert anonymous class to nested
+1182554307843	Extract local variable 'annotationModel'
+1182554335406	Rename method 'getAnnotationModel'
+1182554497328	Extract method 'getModel'
+1182554506343	Inline local variable 'annotationModel'
+1182554511515	Inline local variable 'model'
+1182556100203	Extract constant 'RED'
+1182556113203	Extract constant 'YELLOW'
+1182556293000	Extract constant 'COLOR'
+1182556867109	Inline local variable 'type'

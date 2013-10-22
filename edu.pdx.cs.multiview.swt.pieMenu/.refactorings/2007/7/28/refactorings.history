@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Extract local variable 'label' from expression '&quot;Child &quot; + j'&#13;&#10;- Original project: 'edu.pdx.cs.multiview.swt.pieMenu'&#13;&#10;- Variable name: 'label'&#13;&#10;- Destination method: 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuDemo.build()'&#13;&#10;- Variable expression: '&quot;Child &quot; + j'&#13;&#10;- Replace occurrences of expression with variable" description="Extract local variable 'label'" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;edu.pdx.cs.multiview.swt.pieMenu{PieMenuDemo.java" name="label" replace="true" selection="919 10" stamp="1183951611420" version="1.0"/>
+</session>

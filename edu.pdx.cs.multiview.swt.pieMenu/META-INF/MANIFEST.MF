@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PieMenu
+Bundle-SymbolicName: edu.pdx.cs.multiview.swt.pieMenu
+Bundle-Version: 1.0.0
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.swt,
+ org.eclipse.ui,
+ edu.pdx.cs.multiview.util
+Export-Package: edu.pdx.cs.multiview.swt.pieMenu

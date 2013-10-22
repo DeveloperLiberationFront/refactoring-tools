@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SyntaxColoringView Plug-in
+Bundle-SymbolicName: edu.pdx.cs.multiview.statementViewer; singleton:=true
+Bundle-Version: 1.1.1
+Bundle-Activator: edu.pdx.cs.multiview.statementViewer.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.gef,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.jface.text,
+ edu.pdx.cs.multiview.util,
+ org.eclipse.ui.views
+Eclipse-LazyStart: true
+Export-Package: edu.pdx.cs.multiview.draw2d

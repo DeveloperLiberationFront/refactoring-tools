@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="edu.pdx.cs.multiview.extractMethodAnnotations.actionSet1"
+            label="edu.pdx.cs.multiview.extractMethodAnnotations.actionSet1"
+            visible="true">
+         <menu
+               id="edu.pdx.cs.multiview.extractMethodAnnotations.menu1"
+               label="emaGroup">
+            <groupMarker name="emaMenu"/>
+         </menu>
+         <action
+               class="edu.pdx.cs.multiview.extractmethodannotations.ShowDependencyHandler"
+               icon="icons/dependencyAnnotate.gif"
+               id="edu.pdx.cs.multiview.extractMethodAnnotations.action1"
+               label="Extract Method Annotations"
+               style="push"
+               toolbarPath="emaGroup"
+               tooltip="Show/Hide annotations that assist in method extraction"/>
+      </actionSet>
+   </extension>
+   <extension
+         id="some.id"
+         name="My Commands"
+         point="org.eclipse.ui.commands">
+      <keyBinding
+            command="edu.pdx.cs.multiview.extractMethodAnnotations.command"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
+            keyConfigurationId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            keySequence="M2+M3+N"/>
+      <command
+            category="org.eclipse.jdt.ui.category.refactoring"
+            defaultHandler="edu.pdx.cs.multiview.extractmethodannotations.ShowDependencyHandler"
+            id="edu.pdx.cs.multiview.extractMethodAnnotations.command"
+            name="Show Dependencies Command"/>
+   </extension>
+
+</plugin>

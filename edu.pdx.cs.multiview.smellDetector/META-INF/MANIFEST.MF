@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SmellDetector Plug-in
+Bundle-SymbolicName: edu.pdx.cs.multiview.smellDetector;singleton:=true
+Bundle-Version: 1.0.4
+Bundle-Activator: edu.pdx.cs.multiview.smelldetector.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit,
+ org.eclipse.jdt,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ edu.pdx.cs.multiview.util,
+ org.eclipse.jface.text,
+ org.eclipse.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor
+Eclipse-LazyStart: true

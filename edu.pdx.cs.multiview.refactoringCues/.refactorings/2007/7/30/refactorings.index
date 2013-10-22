@@ -1,0 +1,5 @@
+1185134945498	Inline method 'isStatement'
+1185137626713	Extract local variable 'widget'
+1185137691416	Inline local variable 'model'
+1185138198175	Extract method 'refresh'
+1185138922667	Inline local variable 'text'

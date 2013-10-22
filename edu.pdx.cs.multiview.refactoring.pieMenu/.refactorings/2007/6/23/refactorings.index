@@ -1,0 +1,19 @@
+1181068623984	Inline method 'disposeMenu'
+1181068944312	Delete element
+1181073504937	Extract local variable 'sourceRange'
+1181073617562	Extract method 'x'
+1181082358875	Extract local variable 'last'
+1181082395921	Extract method 'doRefactoring'
+1181082484781	Inline local variable 'r'
+1181082608546	Extract local variable 'r'
+1181161679468	Convert anonymous class to nested
+1181164833953	Rename type 'PieMenuActivator'
+1181166502234	Inline local variable 'nodes'
+1181252899402	Inline local variable 'm'
+1181256260199	Extract method 'addNull'
+1181256273120	Move method 'addNull'
+1181259469980	Extract method 'getNewModifier'
+1181259893980	Convert anonymous class to nested
+1181260398949	Delete element
+1181260742230	Convert member type 'ChangeVisibilityRefactoring' to top level
+1181260785214	Move compilation unit

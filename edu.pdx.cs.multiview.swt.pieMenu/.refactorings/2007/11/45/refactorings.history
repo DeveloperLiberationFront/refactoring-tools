@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Move 1 package(s) to 'edu.pdx.cs.multiview.util/src'&#13;&#10;- Original project: 'edu.pdx.cs.multiview.swt.pieMenu'&#13;&#10;- Destination element: 'edu.pdx.cs.multiview.util/src'&#13;&#10;- Original element: 'edu.pdx.cs.multiview.swt.pieMenu/src/edu.pdx.cs.multiview.swt.pieMenu.geometry'" description="Move package" destination="/src" element1="/src&lt;edu.pdx.cs.multiview.swt.pieMenu.geometry" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1194389651562" version="1.0"/>
+</session>

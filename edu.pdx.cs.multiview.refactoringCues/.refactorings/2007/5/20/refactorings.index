@@ -1,0 +1,3 @@
+1179615694960	Rename method 'getAnnotations'
+1179616290346	Rename method 'getSelectionRegions'
+1179615737300	Extract local variable 'wrappedEditor'

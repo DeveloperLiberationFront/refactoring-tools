@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PieMenu Plug-in
+Bundle-SymbolicName: edu.pdx.cs.multiview.refactoring.pieMenu;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.pdx.cs.multiview.refactoring.piemenu.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ edu.pdx.cs.multiview.util,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.jface.text,
+ org.eclipse.ltk.core.refactoring,
+ org.eclipse.core.resources,
+ org.eclipse.ltk.ui.refactoring,
+ edu.pdx.cs.multiview.swt.pieMenu;bundle-version="1.0.0"
+Eclipse-LazyStart: true

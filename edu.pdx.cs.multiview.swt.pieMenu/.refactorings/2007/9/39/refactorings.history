@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Extract method 'private boolean isMenuActivationEvent(final MouseEvent e)' from 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator.mouseDown()' to 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator'&#13;&#10;- Original project: 'edu.pdx.cs.multiview.swt.pieMenu'&#13;&#10;- Method name: 'isMenuActivationEvent'&#13;&#10;- Destination type: 'edu.pdx.cs.multiview.swt.pieMenu.PieMenuActivator'&#13;&#10;- Declared visibility: 'private'" comments="false" description="Extract method 'isMenuActivationEvent'" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;edu.pdx.cs.multiview.swt.pieMenu{PieMenuActivator.java" name="isMenuActivationEvent" replace="false" selection="731 11" stamp="1190675637324" version="1.0" visibility="2"/>
+</session>

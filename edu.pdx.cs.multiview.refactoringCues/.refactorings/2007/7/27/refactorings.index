@@ -1,0 +1,20 @@
+1183419041099	Extract method 'prep'
+1183419063013	Move member 'prep'
+1183419191818	Inline local variable 'drawStrat'
+1183435597710	Rename package 'edu.pdx.cs.multiview.refactoringview'
+1183435953327	Copy compilation unit
+1183435972965	Delete element
+1183436253649	Rename type 'RefactoringCueView'
+1183483740027	Extract local variable 'action'
+1183484169543	Extract method 'execute'
+1183658347683	Introduce factory for 'RegionList'
+1183658625324	Rename method 'createRegionList'
+1183658668121	Change method 'RegionList'
+1183658809589	Extract method 'compare'
+1183661069355	Inline local variable 'page'
+1183665124511	Extract method 'addExceptionButton'
+1183665136527	Extract method 'addCommentButton'
+1183665220996	Extract local variable 'extractMethodGUI'
+1183665232230	Convert local variable 'extractMethodGUI' to field
+1183669346339	Inline local variable 'activeEditor'
+1183669361980	Inline local variable 'ww'

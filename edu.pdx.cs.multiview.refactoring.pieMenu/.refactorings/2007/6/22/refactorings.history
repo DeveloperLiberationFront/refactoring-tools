@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Move 1 elements(s) to 'edu.pdx.cs.multiview.refactoring.pieMenu/src/edu.pdx.cs.multiview.refactoring.piemenu'&#13;&#10;- Original project: 'edu.pdx.cs.multiview.refactoring.pieMenu'&#13;&#10;- Destination element: 'edu.pdx.cs.multiview.refactoring.pieMenu/src/edu.pdx.cs.multiview.refactoring.piemenu'&#13;&#10;- Original element: 'Startup.java'&#13;&#10;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;edu.pdx.cs.multiview.refactoring.piemenu" element1="/src&lt;{Startup.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1180722322550" units="1" version="1.0"/>
+</session>

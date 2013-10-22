@@ -1,0 +1,24 @@
+1181505835762	Copy compilation unit
+1181506034017	Extract superclass 'ExtractExpressionAction'
+1181507266660	Rename type 'ExtractMethodAction'
+1181507776543	Extract local variable 'constantName'
+1181531124860	Extract method 'isLiteral'
+1181532446800	Inline local variable 'constantName'
+1181534656398	Extract method 'isAcceptable'
+1181535447695	Convert member type 'ExpressionVisitor' to top level
+1181618205541	Extract local variable 'caps'
+1181618232120	Extract method 'generateIdNotIn'
+1181618245619	Inline local variable 'caps'
+1181618271116	Rename method 'generateIdNotIn'
+1181618420621	Rename method 'generateVariableName'
+1181856205765	Rename type 'MoveRefactoring'
+1181856225031	Rename type 'RenameRefactoring'
+1181856302343	Copy compilation unit
+1181856326796	Copy compilation unit
+1181856348250	Copy compilation unit
+1181856385953	Copy compilation unit
+1181856426656	Copy compilation unit
+1181856442625	Copy compilation unit
+1181856482843	Copy compilation unit
+1181856526234	Copy compilation unit
+1181856583968	Copy compilation unit

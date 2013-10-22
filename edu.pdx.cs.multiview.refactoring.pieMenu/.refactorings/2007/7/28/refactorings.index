@@ -1,0 +1,26 @@
+1184003852114	Extract local variable 'standard'
+1184003870771	Extract local variable 'logical'
+1184003879764	Extract local variable 'random'
+1184097561852	Change method 'fillFieldMenu'
+1184097585102	Change method 'fillFieldMenu'
+1184097903758	Convert member type 'PullUp' to top level
+1184098029914	Convert member type 'PushDown' to top level
+1184098042102	Convert member type 'IntroduceIndirection' to top level
+1184098061086	Convert member type 'InlineLocal' to top level
+1184098071508	Convert member type 'ConvertToInstance' to top level
+1184098253305	Convert member type 'InlineMethod' to top level
+1184098624195	Change method 'fillFieldMenu'
+1184098785820	Rename local variable 'parent'
+1184099162836	Change method 'fillFieldMenu'
+1184099848555	Extract local variable 'field'
+1184101344367	Extract superclass 'TestBuilder'
+1184101449055	Convert anonymous class to nested
+1184101744070	Extract method 'addPullUp'
+1184101749258	Extract method 'addNull'
+1184101755086	Extract method 'addPushDown'
+1184101769445	Extract method 'addEncapsulate'
+1184101880070	Extract method 'addInlineLocal'
+1184101885024	Extract method 'addToInstance'
+1184101891320	Extract method 'addInlineMethod'
+1184101901445	Extract method 'addIndirection'
+1184101932836	Pull up members to 'TestBuilder'

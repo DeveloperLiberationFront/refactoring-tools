@@ -1,0 +1,6 @@
+1175284684018	Extract local variable 'selection'
+1175313501594	Extract local variable 'pullUpRefactoring'
+1175295658361	Rename method 'activateOutstandingRefactorings'
+1175295539377	Convert local variable 'refactoringActions' to field
+1175295505830	Extract local variable 'refactoringActions'
+1175284837518	Rename method 'in'

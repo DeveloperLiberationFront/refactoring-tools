@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Refactoring"
+            id="edu.pdx.cs.multiview.refactoringCues">
+      </category>
+      <view
+            name="Refactorings"
+            icon="icons/sample.gif"
+            category="edu.pdx.cs.multiview.refactoringCues"
+            class="edu.pdx.cs.multiview.refactoringCues.views.RefactoringCueView"
+            id="edu.pdx.cs.multiview.refactoringCues.views.RefactoringCueView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            category="org.eclipse.jdt.ui.category.refactoring"
+            defaultHandler="edu.pdx.cs.multiview.refactoringCues.actions.ActivateRefactoring"
+            id="edu.pdx.cs.multiview.refactoringCues.command2"
+            name="Activate Refactoring Command"/>
+      <keyBinding
+            command="edu.pdx.cs.multiview.refactoringCues.command2"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
+            keyConfigurationId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            keySequence="M1+Tab"/>
+   </extension>
+
+</plugin>
