@@ -22,7 +22,7 @@ public class LargeMethodDetector extends SmellDetector<LargeMethodInstance>{
 	}
 
 	@Override
-	public double obviousness() {	return 0.95;		}
+	public double obviousness() {	return 0.96;		}
 	
 	@Override
 	public LargeMethodInstance calculateComplexity(List<IMethod> visibleMethods) {
@@ -93,9 +93,6 @@ class LargeMethodInstance implements SmellInstance{
 		return sortedPairs().get(0).getValue();
 	}
 
-	public int lengthOf(IMethod m) {
-		return methodsToSizes.get(m);
-	}
 
 	public double magnitude() {
 		double maxSeverity = 0;

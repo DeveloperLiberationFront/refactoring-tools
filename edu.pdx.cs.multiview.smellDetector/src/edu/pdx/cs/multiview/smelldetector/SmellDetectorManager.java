@@ -17,6 +17,7 @@ import edu.pdx.cs.multiview.smelldetector.detectors.largeClass.LargeClassDetecto
 import edu.pdx.cs.multiview.smelldetector.detectors.largeMethod.LargeMethodDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.messageChain.MessageChainDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.switchStatement.SwitchDetector;
+import edu.pdx.cs.multiview.smelldetector.detectors.tooManyArguments.TooManyArgumentsDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.typecast.TypecastDetector;
 import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 
@@ -52,6 +53,7 @@ public class SmellDetectorManager {
 		list.add(new InstanceoftDetector(f));
 		list.add(new SwitchDetector(f));
 		list.add(new MessageChainDetector(f));
+		list.add(new TooManyArgumentsDetector(f));
 		
 		//addStubs(f, list);
 		

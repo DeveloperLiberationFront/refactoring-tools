@@ -24,7 +24,7 @@ public class LargeClassDetector extends SmellDetector<LargeClassInstance>{
 
 	@Override
 	public double obviousness() {
-		return 0.96;
+		return 0.97;
 	}
 	
 	@Override
