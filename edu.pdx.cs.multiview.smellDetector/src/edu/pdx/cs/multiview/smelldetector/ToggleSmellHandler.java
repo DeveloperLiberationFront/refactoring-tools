@@ -5,6 +5,7 @@ import java.util.Map;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.IPartListener;
@@ -14,6 +15,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
+import edu.pdx.cs.multiview.smelldetector.indexer.ClumpCreator;
 import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 
 
@@ -66,6 +68,7 @@ public class ToggleSmellHandler extends AbstractHandler {
 		
 		EditorViewportListener.listenTo(activeEditor, detectors.keySet());
 		
+		new	ClumpCreator(activeEditor);
 	}
 	
 	public void disableSmells() {

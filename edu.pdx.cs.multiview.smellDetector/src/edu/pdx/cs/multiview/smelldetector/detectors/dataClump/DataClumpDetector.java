@@ -21,9 +21,6 @@ public class DataClumpDetector extends SmellDetector<SmellInstance>{
 
 	@Override
 	public SmellInstance calculateComplexity(List<IMethod> ms){		
-		
-		spider.spiderFrom(ms);
-
 		return spider;
 	}
 
