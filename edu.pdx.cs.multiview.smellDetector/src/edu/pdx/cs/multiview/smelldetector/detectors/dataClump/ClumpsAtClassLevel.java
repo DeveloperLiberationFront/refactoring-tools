@@ -21,7 +21,7 @@ public class ClumpsAtClassLevel {
 	public ClumpsAtClassLevel(IType iType) {
 		this.iType = iType;
 		String projectName = iType.getJavaProject().getElementName();
-		clumpCollector = ClumpCollector.createCumpCollector(projectName);
+		clumpCollector = ClumpCollector.getClumpCollector(projectName);
 	}
 
 	private List<ClumpSignature> combination(List<String> prefix, List<String> rest) {

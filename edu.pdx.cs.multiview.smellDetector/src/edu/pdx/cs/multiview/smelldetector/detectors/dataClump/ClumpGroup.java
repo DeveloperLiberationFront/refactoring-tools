@@ -26,6 +26,12 @@ class ClumpGroup{
 		this.methods.add(method);
 	}
 	
+	public ClumpGroup(ClumpSignature signature, Set<IMethod> methods) {
+		this.signature = signature;
+		this.methods= methods;
+	}
+	
+	
 	public ClumpGroup(ClumpSignature cs) {
 		signature = cs;
 		methods = new HashSet<IMethod>();
@@ -117,4 +123,11 @@ class ClumpGroup{
 		return signature;
 	}
 
+}
+
+
+class EmptyClumpGroup extends ClumpGroup{
+	public EmptyClumpGroup(ClumpSignature cs) {
+		super(cs, new HashSet<IMethod>());
+	}
 }

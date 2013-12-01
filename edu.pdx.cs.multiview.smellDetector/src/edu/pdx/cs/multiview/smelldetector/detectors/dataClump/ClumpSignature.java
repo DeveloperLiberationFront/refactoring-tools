@@ -1,13 +1,19 @@
 package edu.pdx.cs.multiview.smelldetector.detectors.dataClump;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-class ClumpSignature{
+class ClumpSignature implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2852374595513404071L;
+	
 	private final int signature;
 	private final Set<String> names;
 	

@@ -28,6 +28,7 @@ public class ToggleSmellHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
+		
 		try {
 			if(isActive)	disableSmells();
 			else			enableSmells();

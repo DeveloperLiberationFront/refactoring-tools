@@ -1,6 +1,7 @@
 package edu.pdx.cs.multiview.smelldetector.indexer;
 
 import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
@@ -8,13 +9,22 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
 import edu.pdx.cs.multiview.jdt.util.JDTUtils;
+import edu.pdx.cs.multiview.smelldetector.detectors.dataClump.ClumpCollector;
 import edu.pdx.cs.multiview.smelldetector.detectors.dataClump.ClumpsAtClassLevel;
 
 @SuppressWarnings("restriction")
 public class ClumpCreator {
 
+	private ClumpCollector clumpCollector;
+
 	public ClumpCreator(JavaEditor activeEditor) {
-		createClumps(activeEditor);
+		IJavaProject project = JDTUtils.getCompilationUnit(activeEditor).getJavaProject();
+		clumpCollector = ClumpCollector.getClumpCollector(project.getElementName());
+		if (clumpCollector == null) {
+			clumpCollector = ClumpCollector.createCumpCollector(project);
+			createClumps(activeEditor);
+		}
+		clumpCollector.setInitialized(true);
 	}
 
 	private void createClumps(JavaEditor activeEditor) {
