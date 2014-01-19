@@ -9,6 +9,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CastExpression;
 
+import edu.pdx.cs.multiview.smelldetector.ClassRatingsUpdateListner;
 import edu.pdx.cs.multiview.smelldetector.detectors.ClassSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.MethodSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
@@ -19,8 +20,12 @@ import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 public class TypecastDetector extends SmellDetector<TypeCastInstance>{
 
 	private ClassTypeCastRating ratings = new ClassTypeCastRating();
+	private ClassRatingsUpdateListner classRatingsUpdateListner;
 	
-	public TypecastDetector(Flower f) {	super(f);	}
+	public TypecastDetector(Flower f) {
+		super(f);
+		classRatingsUpdateListner = new ClassRatingsUpdateListner(ratings);
+	}
 	
 	@Override
 	public double obviousness() {	return 0.94;		}
@@ -45,6 +50,10 @@ public class TypecastDetector extends SmellDetector<TypeCastInstance>{
 	@Override
 	public void showDetails() {
 		//new FeatureEnvyExplanationWindow(currentSmell(),sourceViewer());
+	}
+	
+	public ClassRatingsUpdateListner getClassRatingsUpdateListner() {
+		return classRatingsUpdateListner;
 	}
 }
 

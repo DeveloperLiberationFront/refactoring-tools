@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.swt.graphics.Color;
 
+import edu.pdx.cs.multiview.smelldetector.ClassRatingsUpdateListner;
+import edu.pdx.cs.multiview.smelldetector.detectors.MethodSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.InstanceOf.InstanceoftDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.dataClump.DataClumpDetector;
@@ -44,13 +48,19 @@ public class SmellDetectorManager {
 	}
 
 	private void initSmells(Flower f) {
+		
 		ArrayList<SmellDetector<?>> list = new ArrayList<SmellDetector<?>>();
+		
+		InstanceoftDetector instanceOfDetector = new InstanceoftDetector(f);
+		FeatureEnvyDetector featureEnvyDetector = new FeatureEnvyDetector(f);
+		TypecastDetector typeCaseDetector = new TypecastDetector(f);
+		
 		list.add(new LargeMethodDetector(f));
-		list.add(new FeatureEnvyDetector(f));
+		list.add(featureEnvyDetector);
 		list.add(new LargeClassDetector(f));
 		list.add(new DataClumpDetector(f));
-		list.add(new TypecastDetector(f));
-		list.add(new InstanceoftDetector(f));
+		list.add(typeCaseDetector);
+		list.add(instanceOfDetector);
 		list.add(new SwitchDetector(f));
 		list.add(new MessageChainDetector(f));
 		list.add(new TooManyArgumentsDetector(f));
@@ -60,6 +70,12 @@ public class SmellDetectorManager {
 		Collections.sort(list, comparator);
 		
 		smells = mapColorsOnto(list);
+
+		List<ClassRatingsUpdateListner> classRatingsUpdateListners = new ArrayList<ClassRatingsUpdateListner>();
+		classRatingsUpdateListners.add(instanceOfDetector.getClassRatingsUpdateListner());
+		classRatingsUpdateListners.add(featureEnvyDetector.getClassRatingsUpdateListner());
+		classRatingsUpdateListners.add(typeCaseDetector.getClassRatingsUpdateListner());
+		JavaCore.addElementChangedListener(new JavaCodeChangeListner(classRatingsUpdateListners));
 	}
 	
 	public static void dispose(){

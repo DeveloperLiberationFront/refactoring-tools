@@ -64,7 +64,8 @@ public class ToggleSmellHandler extends AbstractHandler {
 		Map<SmellDetector<?>, Color> detectors = manager.smells(flower);
 		flower.attachPetals(detectors);
 		
-		EditorViewportListener.listenTo(activeEditor, detectors.keySet());	
+		EditorViewportListener.listenTo(activeEditor, detectors.keySet());
+		
 	}
 	
 	public void disableSmells() {
