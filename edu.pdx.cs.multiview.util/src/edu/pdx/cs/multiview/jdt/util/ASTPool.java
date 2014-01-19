@@ -1,6 +1,8 @@
 package edu.pdx.cs.multiview.jdt.util;
 
 
+import java.util.Date;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -18,15 +20,30 @@ import org.eclipse.jdt.core.dom.PackageDeclaration;
 public abstract class ASTPool <IndexType>{
 	
 	protected class Entry{
-		public CompilationUnit unit;
-		public String date;
+		private CompilationUnit unit;
+		private Date date;
+		
+		public Entry(CompilationUnit unit, Date date) {
+			this.unit = unit;
+			this.date = date;
+		}
+		
+		public CompilationUnit getUnit() {
+			return unit;
+		}
+	
+		public Date getDate() {
+			return date;
+		}
+		
+		
 	}
 
-	private LRUCache<IndexType, Entry> cache;
+	private LRUCache<String, Entry> cache;
 	private int maxSize = 3;
 
 	protected ASTPool(int size){
-		cache = new LRUCache<IndexType, Entry>(maxSize);
+		cache = new LRUCache<String, Entry>(maxSize);
 		maxSize = size;
 	}
 	
@@ -35,35 +52,41 @@ public abstract class ASTPool <IndexType>{
 		return getEntry(file).unit;
 	}
 
+	public void removeEntry(String path){
+		cache.remove(path);
+	}
+
+	
 	private Entry getEntry(IndexType file) {
-		Entry e = cache.get(file);
+		String path = getPath(file);
+		Entry e = cache.get(path);
 		if(e==null){
 			fillCache(file);
-			e = cache.get(file);
+			e = cache.get(path);
 		}
 		return e;
 	}
 
 	private void fillCache(IndexType file) {
-		Entry e = new Entry();
-		parse(file,e);
-		cache.put(file, e);
+		CompilationUnit compilationUnit = parse(file);
+		Entry e = new Entry(compilationUnit, new Date());
+		cache.put(getPath(file), e);
 	}
 	
-	public String getDate(IndexType file) {
-		
-		return getEntry(file).date;
-	}
+	
 
 	public PackageDeclaration getPackage(IndexType file) {
 		return getAST(file).getPackage();
 	}
 	
 	public void release(IndexType file) {
-		cache.remove(file);
+		cache.remove(getPath(file));
 	}
+
+	abstract String getPath(IndexType file) ;
 	
-	protected abstract void parse(IndexType file, Entry e);
+	
+	protected abstract CompilationUnit parse(IndexType file);
 	
 	private static ASTParser parser;
 	
@@ -98,7 +121,7 @@ class ASTFilePool extends ASTPool<IFile>{
 
 	public ASTFilePool(int size) {super(size);}
 
-	protected void parse(IFile file, Entry e){
+	protected CompilationUnit parse(IFile file){
 			
 			try {
 				String s = JDTUtils.getContents(file.getContents());
@@ -107,8 +130,12 @@ class ASTFilePool extends ASTPool<IFile>{
 				ex.printStackTrace();
 			}
 			
-			e.unit = (CompilationUnit)getParser().createAST(null);
+			return (CompilationUnit)getParser().createAST(null);
 		}
+	
+	protected String getPath(IFile file) {
+		return file.getFullPath().toString();
+	}
 }
 
 class ASTCUPool extends ASTPool<ICompilationUnit>{
@@ -118,11 +145,15 @@ class ASTCUPool extends ASTPool<ICompilationUnit>{
 	}
 
 	@Override
-	protected void parse(ICompilationUnit source, Entry e) {
+	protected CompilationUnit parse(ICompilationUnit source) {
 		
 		getParser().setSource(source);
 		getParser().setResolveBindings(true);
 		
-		e.unit = (CompilationUnit)getParser().createAST(null);
+		return  (CompilationUnit)getParser().createAST(null);
+	}
+	
+	protected String getPath(ICompilationUnit file) {
+		return file.getPath().toString();
 	}
 }

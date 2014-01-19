@@ -9,18 +9,23 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.InstanceofExpression;
 
+import edu.pdx.cs.multiview.smelldetector.ClassRatingsUpdateListner;
 import edu.pdx.cs.multiview.smelldetector.detectors.ClassSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.MethodSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellInstance;
 import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 
-public class InstanceoftDetector extends SmellDetector<InstanceOfInstance>{
+public class InstanceoftDetector extends SmellDetector<InstanceOfInstance> {
 
 	private ClassInstanceOfRating ratings = new ClassInstanceOfRating();
+	private ClassRatingsUpdateListner classRatingsUpdateListner;
 	
-	public InstanceoftDetector(Flower f) {	super(f);	}
-	
+	public InstanceoftDetector(Flower f) {
+		super(f);
+		classRatingsUpdateListner = new ClassRatingsUpdateListner(ratings);
+	}
+
 	@Override
 	public double obviousness() {	return 0.945;		}
 	
@@ -45,6 +50,13 @@ public class InstanceoftDetector extends SmellDetector<InstanceOfInstance>{
 	public void showDetails() {
 		//new FeatureEnvyExplanationWindow(currentSmell(),sourceViewer());
 	}
+
+
+	public ClassRatingsUpdateListner getClassRatingsUpdateListner() {
+		return classRatingsUpdateListner;
+	}
+	
+	
 }
 
 class InstanceOfInstance extends ClassInstanceOfRating implements SmellInstance{

@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.SimpleName;
 
 import edu.pdx.cs.multiview.jdt.util.MemberReference;
+import edu.pdx.cs.multiview.smelldetector.ClassRatingsUpdateListner;
 import edu.pdx.cs.multiview.smelldetector.detectors.ClassSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.MethodSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
@@ -29,9 +30,11 @@ import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 public class FeatureEnvyDetector extends SmellDetector<EnvyInstance>{
 
 	private ClassEnvyRating ratings = new ClassEnvyRating();
+	private ClassRatingsUpdateListner classRatingsUpdateListner;
 	
 	public FeatureEnvyDetector(Flower f) {
 		super(f);
+		classRatingsUpdateListner = new ClassRatingsUpdateListner(ratings);
 	}
 
 	@Override
@@ -65,6 +68,11 @@ public class FeatureEnvyDetector extends SmellDetector<EnvyInstance>{
 	public void showDetails() {
 		new FeatureEnvyExplanationWindow(currentSmell(),sourceViewer());
 	}
+
+	public ClassRatingsUpdateListner getClassRatingsUpdateListner() {
+		return classRatingsUpdateListner;
+	}
+
 }
 
 /**
