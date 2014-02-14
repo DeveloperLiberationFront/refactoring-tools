@@ -16,3 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.workbench.texteditor
 Eclipse-LazyStart: true
+Bundle-ClassPath: lib/ehcache-2.7.5.jar,
+ lib/slf4j-api-1.6.6.jar,
+ lib/slf4j-jdk14-1.6.6.jar,
+ .
