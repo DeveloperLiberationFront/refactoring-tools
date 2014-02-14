@@ -40,8 +40,7 @@ public class ClumpCreator {
 
 	private void createClumpsForMethodsInPackages(IPackageFragment[] buildPackages) {
 		try {
-			for (int i = 0; i < buildPackages.length; i++) {
-				IPackageFragment packageFragment = buildPackages[i];
+			for(IPackageFragment packageFragment : buildPackages){	
 				if (packageFragment.getKind() == IPackageFragmentRoot.K_SOURCE) {
 					createClumpsForMethodsInPackage(packageFragment);
 				}
@@ -55,9 +54,7 @@ public class ClumpCreator {
 	private void createClumpsForMethodsInPackage(IPackageFragment packageFragment) {
 		try {
 			ICompilationUnit[] compilationUnits = packageFragment.getCompilationUnits();
-			for (int j = 0; j < compilationUnits.length; j++) {
-				ICompilationUnit iCompilationUnit = compilationUnits[j];
-				System.out.println(iCompilationUnit.getElementName());
+			for (ICompilationUnit iCompilationUnit : compilationUnits) {
 				createClumpsForMethodsInFile(iCompilationUnit);
 			}
 		} catch (JavaModelException e) {
