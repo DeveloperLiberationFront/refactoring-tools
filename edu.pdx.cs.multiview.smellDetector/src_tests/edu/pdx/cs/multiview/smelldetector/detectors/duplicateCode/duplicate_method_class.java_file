@@ -1,0 +1,19 @@
+package com.testSmellDetector
+
+class DuplicateMethodClass(){
+	
+	public void testMethod(){
+		int a = 5;
+		int b = 7 ;
+		int sum = a+b ;
+		System.out.println(sum);
+	}
+	
+	public void duplicateOfTestMethod() {
+		int a = 5;
+		int b = 7 ;
+		int sum = a+b ;
+		System.out.println(sum);
+	}
+	
+}
