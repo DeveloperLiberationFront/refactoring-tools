@@ -22,9 +22,16 @@ public class ClumpCollector {
 	private String projectName;
 	private Cache dataClumpsCache;
 
-	// boolean to track if all the clumps for a project has been created
-	private boolean initialized;
 
+
+	public static ClumpCollector getClumpCollector(IJavaProject project) {
+		ClumpCollector clumpCollector = clumpCollectorsAtProjectLevel.get(project.getElementName());
+		if(clumpCollector == null){
+			clumpCollector = createCumpCollector(project);
+		}
+		return clumpCollector;
+	}
+	
 	private IJavaProject project;
 
 	private ClumpCollector(IJavaProject project) {
@@ -34,16 +41,13 @@ public class ClumpCollector {
 		initializeCacheForProject();
 	}
 
-	public static ClumpCollector createCumpCollector(IJavaProject project) {
-		String projectName = project.getElementName();
+	private static ClumpCollector createCumpCollector(IJavaProject project) {
 		ClumpCollector clumpCollector = new ClumpCollector(project);
-		clumpCollectorsAtProjectLevel.put(projectName, clumpCollector);
+		clumpCollectorsAtProjectLevel.put(project.getElementName(), clumpCollector);
 		return clumpCollector;
 	}
 
-	public static ClumpCollector getClumpCollector(String projectName) {
-		return clumpCollectorsAtProjectLevel.get(projectName);
-	}
+	
 
 	private void initializeCacheForProject() {
 		String cacheName = projectName + "_dataclumps";
@@ -74,17 +78,15 @@ public class ClumpCollector {
 	}
 
 	public List<ClumpGroup> inGroupOf(IMethod method) {
-		if (initialized) {
-			try {
-				List<ClumpSignature> sigs = ClumpSignature.from(method.getParameterNames());
-				List<ClumpGroup> groups = new LinkedList<ClumpGroup>();
-				for (ClumpSignature sig : sigs) {
-					groups.add(getFromCache(sig));
-				}
-				return groups;
-			} catch (JavaModelException e) {
-				e.printStackTrace();
+		try {
+			List<ClumpSignature> sigs = ClumpSignature.from(method.getParameterNames());
+			List<ClumpGroup> groups = new LinkedList<ClumpGroup>();
+			for (ClumpSignature sig : sigs) {
+				groups.add(getFromCache(sig));
 			}
+			return groups;
+		} catch (JavaModelException e) {
+			e.printStackTrace();
 		}
 		return new ArrayList<ClumpGroup>();
 	}
@@ -103,8 +105,6 @@ public class ClumpCollector {
 		}
 	}
 
-	public void setInitialized(boolean initialized) {
-		this.initialized = initialized;
-	}
+
 
 }

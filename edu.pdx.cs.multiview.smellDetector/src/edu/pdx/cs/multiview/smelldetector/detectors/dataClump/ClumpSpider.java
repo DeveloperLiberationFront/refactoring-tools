@@ -29,7 +29,7 @@ public class ClumpSpider implements SmellInstance {
 		Set<ClumpGroup> currentClumps = new HashSet<ClumpGroup>();
 
 		for (IMethod m : currentMethods) {
-			ClumpCollector clumpColl = ClumpCollector.getClumpCollector(m.getJavaProject().getElementName());
+			ClumpCollector clumpColl = ClumpCollector.getClumpCollector(m.getJavaProject());
 			for (ClumpGroup cg : clumpColl.inGroupOf(m)) {
 				cg.mergeIfClumped(currentClumps);
 			}
