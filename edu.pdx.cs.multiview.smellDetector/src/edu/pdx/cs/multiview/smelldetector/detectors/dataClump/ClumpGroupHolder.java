@@ -7,10 +7,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 
+import edu.pdx.cs.multiview.smelldetector.indexer.MethodKeyValueGenerator;
+
 class ClumpGroupHolder implements Serializable {
+	
 	/**
 	 * 
 	 */
@@ -22,18 +24,13 @@ class ClumpGroupHolder implements Serializable {
 		this.signature = clumpGroup.getSignature();
 		Set<IMethod> methods = clumpGroup.getMethods();
 		for (IMethod iMethod : methods) {
-			// String keyForMethod = getKeyForMethod(iMethod);
-			// ClumpCollector.allMethods.put(keyForMethod, iMethod);
-			String[] typeAndMethodSignature = new String[2];
-			typeAndMethodSignature[0] = iMethod.getDeclaringType().getFullyQualifiedName();
-			try {
-				typeAndMethodSignature[1] = iMethod.getSignature();
-			} catch (JavaModelException e) {
-				e.printStackTrace();
-				continue;
-			}
+			String[] typeAndMethodSignature = getMethodKeyValueGenerator().getClassNameAndMethodSignature(iMethod);
 			this.methodKeys.add(typeAndMethodSignature);
 		}
+	}
+
+	private MethodKeyValueGenerator getMethodKeyValueGenerator() {
+		return MethodKeyValueGenerator.getInstance();
 	}
 
 	public synchronized void add(IMethod m) {
@@ -50,18 +47,9 @@ class ClumpGroupHolder implements Serializable {
 
 	public ClumpGroup getGroup(IJavaProject project) {
 		Set<IMethod> methodsOfGroup = new HashSet<IMethod>();
-		for (String[] methodKey : methodKeys) {
-			try {
-				IType type = project.findType(methodKey[0]);
-				IMethod[] methods = type.getMethods();
-				for (IMethod iMethod : methods) {
-					if (iMethod.getSignature().equals(methodKey[1])) {
-						methodsOfGroup.add(iMethod);
-					}
-				}
-			} catch (JavaModelException e) {
-				e.printStackTrace();
-			}
+		for (String[] classNameAndMethodSignature : methodKeys) {
+			IMethod method = getMethodKeyValueGenerator().getMethod(project, classNameAndMethodSignature);
+ 			methodsOfGroup.add(method);
 		}
 		return new ClumpGroup(signature, methodsOfGroup);
 	}
@@ -74,13 +62,5 @@ class ClumpGroupHolder implements Serializable {
 		}
 		return description.toString();
 	}
-	/*
-	 * private String getKeyForMethod(IMethod iMethod) { StringBuilder key = new
-	 * StringBuilder(); key.append(iMethod.getTypeRoot().getElementName());
-	 * key.append(iMethod.getElementName()); String[] parameterTypes =
-	 * iMethod.getParameterTypes(); for (String string : parameterTypes) {
-	 * key.append(string); } return key.toString(); }
-	 */
-
-	// http://whileonefork.blogspot.in/2010/11/interrogating-java-model-in-eclipse-jdt.html
+	
 }

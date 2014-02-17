@@ -11,7 +11,7 @@ public class DuplicateCodeMetadataCollector {
 		return collector;
 	}
 	
-	public void save(int hashOfCode, String methodName){
+	public void save(int hashOfCode, String[] classAndMethodName){
 		
 	}
 }

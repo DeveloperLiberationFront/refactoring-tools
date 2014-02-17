@@ -64,22 +64,54 @@ class ClumpSignature implements Serializable{
     	return sigs;
     }  
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
-	public boolean equals(Object o){
-		if(!(o instanceof ClumpSignature)){
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		if (obj == null)
 			return false;
+		
+		if (getClass() != obj.getClass())
+			return false;
+		
+		ClumpSignature other = (ClumpSignature) obj;
+		if (names == null) {
+			if (other.names != null)
+				return false;
+		} else if (!names.equals(other.names))
+			return false;
+		
+		if (signature != other.signature)
+			return false;
+		
+		if(other.names.size() != names.size())
+			return false;
+		
+		for(String name: other.names){
+			if(!names.contains(name)){
+				return false;
+			}
 		}
 		
-		return ((ClumpSignature)o).signature==this.signature;
+		return true;
 	}
+	
+	
 	
 	@Override
 	public String toString(){
 		return names.toString();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return signature;
 	}
 
