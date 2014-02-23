@@ -27,7 +27,7 @@ public class DuplicateCodeMetadataCreatorTest {
 		System.out.println("File Path: " + path);
 		baseSmellDetectorTest = new BaseSmellDetectorTest(path);
 
-		duplicateCodeMetadataCreator = new DuplicateCodeMetadataCreator() {
+		duplicateCodeMetadataCreator = new DuplicateCodeMetadataCreator(baseSmellDetectorTest.getTestProject().getJavaProject()) {
 			@Override
 			DuplicateCodeMetadataCollector getCollector() {
 				return collectorMock;

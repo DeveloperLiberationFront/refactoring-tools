@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -23,6 +22,15 @@ import edu.pdx.cs.multiview.test.JavaTestProject;
 
 public class BaseSmellDetectorTest {
 
+	private JavaTestProject testProject;
+
+	/**
+	 * @return the testProject
+	 */
+	public JavaTestProject getTestProject() {
+		return testProject;
+	}
+
 	/**
 	 * Pass the path of the java file that needs to be added to the test
 	 * project. We would like to have separate java files for different types of
@@ -33,9 +41,9 @@ public class BaseSmellDetectorTest {
 	 * 
 	 */
 	public BaseSmellDetectorTest(String filePath) throws Exception {
-		JavaTestProject testProject = createTestProject();
+		testProject = createTestProject();
 		IPackageFragment frag = testProject.createPackage("com.testSmellDetector"); 
-		ICompilationUnit cUnit = frag.createCompilationUnit("SmellClass.java", readFileAsString(filePath), true, null);
+		frag.createCompilationUnit("SmellClass.java", readFileAsString(filePath), true, null);
 	}
 
 	private JavaTestProject createTestProject() throws CoreException {

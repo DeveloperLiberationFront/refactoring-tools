@@ -7,23 +7,21 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import net.sf.ehcache.config.CacheConfiguration;
 
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 
+import edu.pdx.cs.multiview.smelldetector.indexer.EhcacheFactory;
+
 public class ClumpCollector {
 
 	private static Map<String, ClumpCollector> clumpCollectorsAtProjectLevel = new HashMap<String, ClumpCollector>();
 
-	private String projectName;
 	private Cache dataClumpsCache;
-
-
-
+	private IJavaProject project;
+	
 	public static ClumpCollector getClumpCollector(IJavaProject project) {
 		ClumpCollector clumpCollector = clumpCollectorsAtProjectLevel.get(project.getElementName());
 		if(clumpCollector == null){
@@ -31,14 +29,11 @@ public class ClumpCollector {
 		}
 		return clumpCollector;
 	}
-	
-	private IJavaProject project;
 
 	private ClumpCollector(IJavaProject project) {
 		String projectName = project.getElementName();
-		this.project = project;
-		this.projectName = projectName;
-		initializeCacheForProject();
+		String cacheName = projectName + "_dataclumps";
+		dataClumpsCache = getEhcacheFactory().createCache(cacheName);
 	}
 
 	private static ClumpCollector createCumpCollector(IJavaProject project) {
@@ -48,21 +43,6 @@ public class ClumpCollector {
 	}
 
 	
-
-	private void initializeCacheForProject() {
-		String cacheName = projectName + "_dataclumps";
-		dataClumpsCache = CacheManager.getInstance().getCache(cacheName);
-		if (dataClumpsCache == null) {
-			CacheManager.getInstance().addCache(cacheName);
-			dataClumpsCache = CacheManager.getInstance().getCache(cacheName);
-		}
-
-		CacheConfiguration config = dataClumpsCache.getCacheConfiguration();
-		// TODO : actual value can be decided after discussion with team and
-		// more profiling
-		config.setMaxEntriesLocalHeap(500);
-
-	}
 
 	public void addToCache(ClumpSignature sig, IMethod m) {
 		Element element = dataClumpsCache.get(sig);
@@ -104,6 +84,12 @@ public class ClumpCollector {
 			return new EmptyClumpGroup(sig);
 		}
 	}
+
+	private EhcacheFactory getEhcacheFactory() {
+		return EhcacheFactory.getInstance();
+	}
+
+	
 
 
 

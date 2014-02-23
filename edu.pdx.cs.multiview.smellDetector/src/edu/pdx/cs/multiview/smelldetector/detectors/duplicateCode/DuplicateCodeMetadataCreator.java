@@ -1,5 +1,6 @@
 package edu.pdx.cs.multiview.smelldetector.detectors.duplicateCode;
 
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 
@@ -11,23 +12,15 @@ public class DuplicateCodeMetadataCreator implements MethodSmellMetadataCreator 
 	
 	private DuplicateCodeMetadataCollector collector;
 
-	public DuplicateCodeMetadataCreator() {
-		collector = DuplicateCodeMetadataCollector.getInstance();
+	public DuplicateCodeMetadataCreator(IJavaProject project) {
+		collector = DuplicateCodeMetadataCollector.getInstance(project);
 	}
 
 	@Override
 	public void createSmellMetaData(IMethod method) {
 		try {
-			String source = method.getSource();
-			String newLineSeparator = System.getProperty( "line.separator" );
-			String[] lines = source.split(newLineSeparator);
-			String[] linesWithoutSpace = new String[lines.length];
-			for (int i = 0; i < lines.length; i++) {
-				// remove tabs and white spaces
-				linesWithoutSpace[i] = lines[i].replaceAll("\\s","");
-			}
-			
-			for (String lineWithoutSpace : linesWithoutSpace) {
+			String[] lines = DuplicateCodeUtil.getMethodLinesWithoutTabsAndSpaces(method);
+			for (String lineWithoutSpace : lines) {
 				int hashCode = lineWithoutSpace.hashCode();
 				getCollector().save(hashCode, getMethodKeyValueGenerator().getClassNameAndMethodSignature(method));
 			}
