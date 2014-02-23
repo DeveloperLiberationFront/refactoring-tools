@@ -29,7 +29,7 @@ public class DuplicateCodeMetadataCreatorTest {
 
 		duplicateCodeMetadataCreator = new DuplicateCodeMetadataCreator(baseSmellDetectorTest.getTestProject().getJavaProject()) {
 			@Override
-			DuplicateCodeMetadataCollector getCollector() {
+			public DuplicateCodeMetadataCollector getCollector() {
 				return collectorMock;
 			}
 		};

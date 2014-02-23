@@ -21,7 +21,7 @@ public class MessageChainDetector extends SmellDetector<MessageChainInstance>{
 	public MessageChainDetector(Flower f) {	super(f);	}
 	
 	@Override
-	public double obviousness() {	return 0.89;		}
+	public double obviousness() {	return 0.6;		}
 
 	@Override
 	public MessageChainInstance calculateComplexity(List<IMethod> visibleMethods) {

@@ -5,10 +5,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.core.IJavaProject;
-
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
+
+import org.eclipse.jdt.core.IJavaProject;
+
 import edu.pdx.cs.multiview.smelldetector.indexer.EhcacheFactory;
 
 public class DuplicateCodeMetadataCollector {
@@ -16,6 +17,7 @@ public class DuplicateCodeMetadataCollector {
 	private static Map<String, DuplicateCodeMetadataCollector> collectorsAtProjectLevel = new HashMap<String, DuplicateCodeMetadataCollector>();
 
 	private Cache duplicateCodeCache;
+	private boolean initialized;
 
 	private DuplicateCodeMetadataCollector(IJavaProject project) {
 		String projectName = project.getElementName();
@@ -26,7 +28,7 @@ public class DuplicateCodeMetadataCollector {
 		return EhcacheFactory.getInstance();
 	}
 
-	public static DuplicateCodeMetadataCollector getInstance(IJavaProject project) {
+	public synchronized static DuplicateCodeMetadataCollector getInstance(IJavaProject project) {
 		String projectName = project.getElementName();
 		DuplicateCodeMetadataCollector collector = collectorsAtProjectLevel.get(projectName);
 		if (collector == null) {
@@ -55,18 +57,25 @@ public class DuplicateCodeMetadataCollector {
 		putInCache(hashOfCode, methodNames);
 	}
 
-	public Set<ClassAndMethodName> getClassAndMethodNames(int hashcode){
+	public Set<ClassAndMethodName> getClassAndMethodNames(int hashcode) {
 		Element element = getFromCache(hashcode);
-		return (Set<ClassAndMethodName>) element.getObjectValue();
+		if (initialized && element!= null && element.getObjectValue() != null) {
+			return (Set<ClassAndMethodName>) element.getObjectValue();
+		} else {
+			return new HashSet<ClassAndMethodName>();
+		}
 	}
 	
-	Element getFromCache(int hashOfCode) {
+	synchronized Element getFromCache(int hashOfCode) {
 		return duplicateCodeCache.get(hashOfCode);
 	}
 	
 	
+	public void setInitialized(boolean initialized) {
+		this.initialized = initialized;
+	}
 
-	void putInCache(int hashOfCode, Set<ClassAndMethodName> methodNames) {
+	synchronized void  putInCache(int hashOfCode, Set<ClassAndMethodName> methodNames) {
 		duplicateCodeCache.put(new Element(hashOfCode, methodNames));
 	}
 

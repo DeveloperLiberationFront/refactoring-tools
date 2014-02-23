@@ -72,12 +72,12 @@ public class ToggleSmellHandler extends AbstractHandler {
 		
 		EditorViewportListener.listenTo(activeEditor, detectors.keySet());
 		
-		initializeClumpCreationJob(activeEditor);
+		initializeSmellMataDataIndexing(activeEditor);
 		
 	}
 
-	private void initializeClumpCreationJob(final JavaEditor activeEditor) {
-		Job job = new Job("My First Job") {
+	private void initializeSmellMataDataIndexing(final JavaEditor activeEditor) {
+		Job job = new Job("Index Smell Metadata") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {

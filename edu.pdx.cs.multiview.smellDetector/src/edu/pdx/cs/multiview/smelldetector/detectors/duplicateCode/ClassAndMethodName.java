@@ -28,8 +28,13 @@ class ClassAndMethodName implements Serializable{
 				&& classAndMethodName[1].equals(classNameAndMethodNameArg[1]);
 	}
 
+	
 	@Override
 	public String toString() {
 		return "[" + classAndMethodName[0] + ":" + classAndMethodName[1] + "]";
+	}
+	
+	public String getMethodName(){
+		return classAndMethodName[1];
 	}
 }

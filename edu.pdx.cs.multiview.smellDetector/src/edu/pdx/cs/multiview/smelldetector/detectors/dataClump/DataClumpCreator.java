@@ -74,4 +74,11 @@ public class DataClumpCreator implements MethodSmellMetadataCreator {
 		}
 	}
 
+	
+	public ClumpCollector getCollector() {
+		return clumpCollector;
+	}
+	
+	
+
 }

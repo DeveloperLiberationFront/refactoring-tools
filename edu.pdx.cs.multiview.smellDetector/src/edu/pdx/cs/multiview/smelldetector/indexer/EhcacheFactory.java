@@ -22,6 +22,7 @@ public class EhcacheFactory {
 		// TODO : actual value can be decided after discussion with team and
 		// more profiling
 		config.setMaxEntriesLocalHeap(500);
+		config.setCopyOnRead(true);
 		return cache;
 	}
 

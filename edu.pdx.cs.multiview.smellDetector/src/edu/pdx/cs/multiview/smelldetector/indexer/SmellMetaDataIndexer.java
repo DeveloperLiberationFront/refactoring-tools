@@ -14,6 +14,8 @@ import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
 import edu.pdx.cs.multiview.jdt.util.JDTUtils;
 import edu.pdx.cs.multiview.smelldetector.detectors.dataClump.DataClumpCreator;
+import edu.pdx.cs.multiview.smelldetector.detectors.duplicateCode.DuplicateCodeMetadataCollector;
+import edu.pdx.cs.multiview.smelldetector.detectors.duplicateCode.DuplicateCodeMetadataCreator;
 
 /**
  * @author robin
@@ -30,12 +32,20 @@ public class SmellMetaDataIndexer {
 
 	public SmellMetaDataIndexer(JavaEditor activeEditor) {
 		IJavaProject project = JDTUtils.getCompilationUnit(activeEditor).getJavaProject();
-		MethodSmellMetadataCreator dataCumpCreator = new DataClumpCreator(project);
+		DataClumpCreator dataCumpCreator = new DataClumpCreator(project);
+		DuplicateCodeMetadataCreator duplicateCodeMetadataCreator = new DuplicateCodeMetadataCreator(project);
+		
 		methodSmellMetadataCreators.add(dataCumpCreator);
+		methodSmellMetadataCreators.add(duplicateCodeMetadataCreator);
+		
 		createSmellMetaData(activeEditor);
+		
+		dataCumpCreator.getCollector().setInitialized(true);
+		duplicateCodeMetadataCreator.getCollector().setInitialized(true);
 	}
 
 	private void createSmellMetaData(JavaEditor activeEditor) {
+		System.out.println("############## Will be Indexing the data for complete project ##############");
 		try {
 			ICompilationUnit compilationUnit = JDTUtils.getCompilationUnit(activeEditor);
 			IPackageFragment[] buildPackages;

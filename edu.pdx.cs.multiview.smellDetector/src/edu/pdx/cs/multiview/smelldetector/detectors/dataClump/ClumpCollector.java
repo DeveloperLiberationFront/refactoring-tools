@@ -18,9 +18,10 @@ import edu.pdx.cs.multiview.smelldetector.indexer.EhcacheFactory;
 public class ClumpCollector {
 
 	private static Map<String, ClumpCollector> clumpCollectorsAtProjectLevel = new HashMap<String, ClumpCollector>();
-
+	
 	private Cache dataClumpsCache;
 	private IJavaProject project;
+	private boolean initialized;
 	
 	public static synchronized ClumpCollector getClumpCollector(IJavaProject project) {
 		ClumpCollector clumpCollector = clumpCollectorsAtProjectLevel.get(project.getElementName());
@@ -67,7 +68,7 @@ public class ClumpCollector {
 
 	private ClumpGroup getFromCache(ClumpSignature sig) {
 		Element element = dataClumpsCache.get(sig);
-		if (element != null) {
+		if (initialized && element != null) {
 			Object objectValue = element.getObjectValue();
 			ClumpGroupHolder groupHolder = (ClumpGroupHolder) objectValue;
 			System.out.println(" Found Clump Group \n" + groupHolder);
@@ -77,14 +78,17 @@ public class ClumpCollector {
 			System.out.println(" No Clump Found for Sig :" + sig);
 			return new EmptyClumpGroup(sig);
 		}
+
+	}
+
+	
+	public void setInitialized(boolean initialized) {
+		this.initialized = initialized;
 	}
 
 	private EhcacheFactory getEhcacheFactory() {
 		return EhcacheFactory.getInstance();
 	}
-
-	
-
 
 
 }

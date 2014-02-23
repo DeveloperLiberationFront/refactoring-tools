@@ -9,7 +9,7 @@ import edu.pdx.cs.multiview.smelldetector.ui.Flower;
 
 public class DuplicateCodeDetector extends SmellDetector<DuplicateCodeInstace>{
 
-	private static final double MODERATELY_OBVIOUS = 0.63;
+	private static final double MODERATELY_OBVIOUS = 0.7;
 	private static final String DUPLICATE_CODE_LABEL_TEXT = "Duplicate Code";
 	
 	

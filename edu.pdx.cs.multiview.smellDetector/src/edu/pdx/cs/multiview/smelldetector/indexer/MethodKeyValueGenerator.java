@@ -39,7 +39,7 @@ public class MethodKeyValueGenerator {
 		return method;
 	}
 	
-	private  String getMethodFullName(IMethod iMethod){
+	public  String getMethodFullName(IMethod iMethod){
 	        StringBuilder name = new StringBuilder();
 	        name.append(iMethod.getDeclaringType().getFullyQualifiedName());
 	        name.append(".");

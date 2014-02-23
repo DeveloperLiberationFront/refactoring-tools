@@ -12,6 +12,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellInstance;
+import edu.pdx.cs.multiview.smelldetector.indexer.MethodKeyValueGenerator;
 
 public class DuplicateCodeInstace implements SmellInstance {
 	List<IMethod> visibleMethods;
@@ -43,7 +44,7 @@ public class DuplicateCodeInstace implements SmellInstance {
 					lineByLineMapping.put(line.hashCode(), collector.getClassAndMethodNames(line.hashCode()));
 			}
 			 HashMap<ClassAndMethodName, Integer> methodsToRepeatedLinesMap = getMethodsToRepeatedLinesMap(lineByLineMapping);
-			 numberOfDuplicateLines = getMaxNumberOfRepeatedLines(methodsToRepeatedLinesMap);
+			 numberOfDuplicateLines = getMaxNumberOfRepeatedLines(method, methodsToRepeatedLinesMap);
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		}
@@ -53,11 +54,15 @@ public class DuplicateCodeInstace implements SmellInstance {
 	
 	
 
-	private int getMaxNumberOfRepeatedLines(HashMap<ClassAndMethodName, Integer> methodsToRepeatedLinesMap) {
+	private int getMaxNumberOfRepeatedLines(IMethod method,
+			HashMap<ClassAndMethodName, Integer> methodsToRepeatedLinesMap) {
 		int max = 0;
-		for(Entry<ClassAndMethodName, Integer> entry: methodsToRepeatedLinesMap.entrySet()){
-			if(max < entry.getValue()){
-				max = entry.getValue();
+		for (Entry<ClassAndMethodName, Integer> entry : methodsToRepeatedLinesMap.entrySet()) {
+			// should not be checking match with itself
+			if (!entry.getKey().getMethodName().equals(MethodKeyValueGenerator.getInstance().getMethodFullName(method))) {
+				if (max < entry.getValue()) {
+					max = entry.getValue();
+				}
 			}
 		}
 		return max;

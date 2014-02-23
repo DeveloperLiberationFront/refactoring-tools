@@ -30,7 +30,7 @@ public class DuplicateCodeMetadataCreator implements MethodSmellMetadataCreator 
 		}
 	}
 
-	DuplicateCodeMetadataCollector getCollector() {
+	public DuplicateCodeMetadataCollector getCollector() {
 		return collector;
 	}
 
