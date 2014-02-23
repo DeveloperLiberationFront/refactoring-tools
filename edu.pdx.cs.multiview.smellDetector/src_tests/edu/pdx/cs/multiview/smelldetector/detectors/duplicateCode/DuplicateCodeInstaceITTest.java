@@ -27,6 +27,8 @@ public class DuplicateCodeInstaceITTest {
 		baseSmellDetectorTest = new BaseSmellDetectorTest(path);
 		duplicateCodeMetadataCreator = new DuplicateCodeMetadataCreator(baseSmellDetectorTest.getTestProject().getJavaProject());
 		duplicateCodeMetadataCreator.createSmellMetaData(getTestMethod());
+		duplicateCodeMetadataCreator.createSmellMetaData(getDuplicateOfTestMethod());
+		duplicateCodeMetadataCreator.getCollector().setInitialized(true);
 		List<IMethod> visibleMethods = new ArrayList<IMethod>();
 		visibleMethods.add(getTestMethod());
 		duplicateCodeInstace = new DuplicateCodeInstace(visibleMethods);
@@ -34,12 +36,12 @@ public class DuplicateCodeInstaceITTest {
 	
 	@Test
 	public void shouldReturnCorrectNumberOfDuplicateLines() throws Exception {
-		assertEquals(5, duplicateCodeInstace.getNumberOfDuplicateLinesForMethod(getTestMethod()));
+		assertEquals(4, duplicateCodeInstace.getNumberOfDuplicateLinesForMethod(getTestMethod()));
 	}
 	
 	@Test
 	public void shouldReturnCorrectSmellMagnitude() throws Exception {
-		assertEquals(.66, duplicateCodeInstace.magnitude(), 0.01);
+		assertEquals(.33, duplicateCodeInstace.magnitude(), 0.01);
 	}
 	
 	
@@ -48,5 +50,10 @@ public class DuplicateCodeInstaceITTest {
 		return baseSmellDetectorTest.getMethod(methodSignature);
 	}
 	
+	
+	private IMethod getDuplicateOfTestMethod() throws Exception {
+		String methodSignature = "duplicateOfTestMethod";
+		return baseSmellDetectorTest.getMethod(methodSignature);
+	}
 	
 }
