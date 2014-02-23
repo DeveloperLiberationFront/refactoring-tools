@@ -1,7 +1,6 @@
 package edu.pdx.cs.multiview.smelldetector.detectors.dataClump;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,15 +33,7 @@ class ClumpGroupHolder implements Serializable {
 	}
 
 	public synchronized void add(IMethod m) {
-		String[] typeAndMethodSignature = new String[2];
-		typeAndMethodSignature[0] = m.getDeclaringType().getFullyQualifiedName();
-		try {
-			typeAndMethodSignature[1] = m.getSignature();
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-			return;
-		}
-		this.methodKeys.add(typeAndMethodSignature);
+		this.methodKeys.add(getMethodKeyValueGenerator().getClassNameAndMethodSignature(m));
 	}
 
 	public ClumpGroup getGroup(IJavaProject project) {
@@ -56,9 +47,9 @@ class ClumpGroupHolder implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuilder description = new StringBuilder("Signature : "+ signature+ "\n Methods :");
+		StringBuilder description = new StringBuilder("Signature : "+ signature+ "\n Methods : \n");
 		for (String[] methodKey : methodKeys) {
-			description.append("\t " + Arrays.toString(methodKey));
+			description.append("\t " + methodKey[1] +" \n");
 		}
 		return description.toString();
 	}

@@ -22,27 +22,21 @@ public class ClumpCollector {
 	private Cache dataClumpsCache;
 	private IJavaProject project;
 	
-	public static ClumpCollector getClumpCollector(IJavaProject project) {
+	public static synchronized ClumpCollector getClumpCollector(IJavaProject project) {
 		ClumpCollector clumpCollector = clumpCollectorsAtProjectLevel.get(project.getElementName());
 		if(clumpCollector == null){
-			clumpCollector = createCumpCollector(project);
+			clumpCollector = new ClumpCollector(project);
+			clumpCollectorsAtProjectLevel.put(project.getElementName(), clumpCollector);
 		}
 		return clumpCollector;
 	}
 
 	private ClumpCollector(IJavaProject project) {
+		this.project = project;
 		String projectName = project.getElementName();
 		String cacheName = projectName + "_dataclumps";
 		dataClumpsCache = getEhcacheFactory().createCache(cacheName);
 	}
-
-	private static ClumpCollector createCumpCollector(IJavaProject project) {
-		ClumpCollector clumpCollector = new ClumpCollector(project);
-		clumpCollectorsAtProjectLevel.put(project.getElementName(), clumpCollector);
-		return clumpCollector;
-	}
-
-	
 
 	public void addToCache(ClumpSignature sig, IMethod m) {
 		Element element = dataClumpsCache.get(sig);
@@ -80,7 +74,7 @@ public class ClumpCollector {
 			ClumpGroup clumpGroup = groupHolder.getGroup(project);
 			return clumpGroup;
 		} else {
-			System.out.println(" **** No Clump Found for Sig *** :" + sig);
+			System.out.println(" No Clump Found for Sig :" + sig);
 			return new EmptyClumpGroup(sig);
 		}
 	}
