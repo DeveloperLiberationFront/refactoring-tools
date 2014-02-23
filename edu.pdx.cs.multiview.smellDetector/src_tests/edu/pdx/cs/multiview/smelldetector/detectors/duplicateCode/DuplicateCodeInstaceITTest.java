@@ -37,8 +37,16 @@ public class DuplicateCodeInstaceITTest {
 		assertEquals(5, duplicateCodeInstace.getNumberOfDuplicateLinesForMethod(getTestMethod()));
 	}
 	
+	@Test
+	public void shouldReturnCorrectSmellMagnitude() throws Exception {
+		assertEquals(.66, duplicateCodeInstace.magnitude(), 0.01);
+	}
+	
+	
 	private IMethod getTestMethod() throws Exception {
 		String methodSignature = "testMethod";
 		return baseSmellDetectorTest.getMethod(methodSignature);
 	}
+	
+	
 }

@@ -1,6 +1,13 @@
 package edu.pdx.cs.multiview.smelldetector.detectors.duplicateCode;
 
-class ClassAndMethodName {
+import java.io.Serializable;
+
+class ClassAndMethodName implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5734585724006676923L;
+
 	String[] classAndMethodName;
 
 	public ClassAndMethodName(String[] classAndMethodName) {

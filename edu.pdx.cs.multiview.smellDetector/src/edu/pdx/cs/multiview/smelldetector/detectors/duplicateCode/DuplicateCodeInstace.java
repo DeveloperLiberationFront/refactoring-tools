@@ -26,7 +26,8 @@ public class DuplicateCodeInstace implements SmellInstance {
 		for (IMethod method : visibleMethods) {
 			numberOfCommonLines +=getNumberOfDuplicateLinesForMethod(method);
 		}
-		return (numberOfCommonLines-2)/4;
+		
+		return (numberOfCommonLines-3.0)/3.0;
 	}
 	
 	int getNumberOfDuplicateLinesForMethod(IMethod method){
