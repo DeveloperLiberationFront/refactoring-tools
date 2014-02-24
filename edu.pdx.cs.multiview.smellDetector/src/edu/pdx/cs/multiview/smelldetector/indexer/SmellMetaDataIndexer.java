@@ -66,7 +66,6 @@ public class SmellMetaDataIndexer {
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		}
-		System.gc();
 	}
 
 	private void createSmellMetaDataForPackage(IPackageFragment packageFragment) {
