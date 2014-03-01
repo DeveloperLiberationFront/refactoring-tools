@@ -16,6 +16,7 @@ import edu.pdx.cs.multiview.smelldetector.detectors.MethodSmellRating;
 import edu.pdx.cs.multiview.smelldetector.detectors.SmellDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.InstanceOf.InstanceoftDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.dataClump.DataClumpDetector;
+import edu.pdx.cs.multiview.smelldetector.detectors.duplicateCode.DuplicateCodeDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.featureEnvy.FeatureEnvyDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.largeClass.LargeClassDetector;
 import edu.pdx.cs.multiview.smelldetector.detectors.largeMethod.LargeMethodDetector;
@@ -64,6 +65,7 @@ public class SmellDetectorManager {
 		list.add(new SwitchDetector(f));
 		list.add(new MessageChainDetector(f));
 		list.add(new TooManyArgumentsDetector(f));
+		list.add(new DuplicateCodeDetector(f));
 		
 		//addStubs(f, list);
 		
