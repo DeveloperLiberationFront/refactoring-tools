@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/stench_blossom_1.0.4.jar" id="stench_blossom" version="1.0.4"/>
+   <category-def name="stench_blossom" label="Stench Blossom"/>
+</site>
